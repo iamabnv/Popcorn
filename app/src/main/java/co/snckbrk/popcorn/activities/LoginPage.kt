@@ -1,5 +1,4 @@
 package co.snckbrk.popcorn.activities
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +11,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -27,6 +25,7 @@ class LoginPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
 
+        //id token in strings.xml later
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("165757444706-37s3mb6hfj1594mq5gfb0f6sq8klsrp4.apps.googleusercontent.com")
             .requestEmail()
@@ -47,9 +46,10 @@ class LoginPage : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        val textviewew = findViewById<TextView>(R.id.usernametextview) as TextView
+        //val textviewew = findViewById<TextView>(R.id.login_username) as TextView
         if (currentUser != null) {
-            textviewew.text = currentUser.displayName
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
